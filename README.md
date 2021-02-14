@@ -1,5 +1,5 @@
 # Residential-Solar-Cost-Modeling
-This code models the effect of residential solar installation on energy grid prices
+This code creates a python model for the effect of residential solar installation on energy grid prices
 
 
 The model creates a House class object that takes as parameters information about geographic location and solar adoption. 
