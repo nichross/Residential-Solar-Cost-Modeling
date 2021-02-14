@@ -1,0 +1,110 @@
+'''
+This is the python pseudocode for creating the House class object
+Modified: February 14, 2021 by NAR
+'''
+
+
+class House:
+
+    def __init__(self, city, solar):
+        self.city = city
+        self.solar = solar
+
+    def savings_in_range(self, start_date, end_date):
+        """
+        This function take a date range from the user and returns the household savings for
+        that range
+        The solar_savings function is called and then indexed within the provided range
+        The remaining hourly savings are then summed and returned to the user
+        :param start_date:
+        :param end_date:
+        :return savings:
+        """
+
+    def cost_in_range(self, start_date, end_date):
+        """
+        This function take a date range from the user and returns the household costs for
+        that range
+        The real_cost function is called and then indexed within the provided range
+        The remaining hourly costs are then summed and returned to the user
+        :param start_date:
+        :param end_date:
+        :return cost:
+        """
+
+    def __get_station(self):
+        tmy3_dict = {
+            "Pittsburgh": 725200,
+            "Boston": 725090,
+            "Charlotte": 723140,
+            "Washington DC": 724050,
+            "Nashville": 723270
+        }
+        city = self.city
+        station = tmy3_dict[city]
+        return station
+
+    def __get_coord(self):
+        tmy3_coord = {
+            725200: {'lat': 40.5, 'lng': -80.233},
+            725090: {'lat': 42.367, 'lng': -71.071},
+            723140: {'lat': 35.217, 'lng': -80.95},
+            724050: {'lat': 38.867, 'lng': -77.033},
+            723270: {'lat': 36.117, 'lng': -86.683}
+        }
+        lat = tmy3_coord[self.__get_station()]['lat']
+        lng = tmy3_coord[self.__get_station()]['lng']
+        return lat, lng
+
+    def __energy_demand(self):
+        """
+        This function returns the kWh demanded each hour of the year for the household:
+        First the station number and beautifulsoup are used to pull the correct data file
+        from the OpenEI server
+        Then the electrical data is summed in a new column to give total hourly kW
+        is returned
+        :return demand:
+        """
+
+    def __solar_supply(self):
+        """
+        This function returns potential kWh supply each hour for the household:
+        First there is a check to see if the house is a solar house, if not return a zeroed array
+        Then the station number and a get request are used to access the data from the
+        NCDC server
+        Then the global horizontal data is used to with a conversion equation to find the
+        potential supply of solar energy over a year in a new column
+        :return supply:
+        """
+
+    def __real_demand(self):
+        """
+        This function returns the kWh not covered by solar installation:
+        A new array is created consisting of the energy_demand array less the solar_supply array
+        :return demand:
+        """
+
+    def __get_cost(self):
+        """
+        This function returns the cost per kWh given by a local utility:
+        First the latitude and longitude of the station number are used to call the OpenEI API
+        Then the url for the cost per kWh is pulled from the data returned by the API
+        Then beautifulsoup is used to pull the cost per kWh from the webpage
+        :return cost:
+        """
+
+    def __solar_savings(self):
+        """
+        This function returns hourly savings from solar installation:
+        The solar_supply array is multiplied by the get_cost integer minus an estimated solar
+        maintenance cost
+        :return savings:
+        """
+
+    def __real_cost(self):
+        """
+        This function returns hourly energy cost for the household:
+        The solar_savings array is subtracted from the energy_demand array is multiplied
+        by the get_cost integer
+        :return cost:
+        """
