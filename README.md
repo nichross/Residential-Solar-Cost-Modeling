@@ -1,14 +1,14 @@
 # Residential-Solar-Cost-Modeling
-This code creates a python model for the effect of residential solar installation on energy grid prices <br /><br /><br /><br /><br /><br />
+This code creates a python model for the effect of residential solar installation on energy grid prices <br /><br /><br /><br /><br />
 
 
 The model includes a **class object "House"** that takes as parameters information about geographic location and solar adoption.<br /><br />
 
-The class contains **eight private functions**:
+The House class contains **eight private functions**:
 
 The get_station function returns the TMY station for the house's city
 
-The get_station function returns the latitude and longitude associated with the TMY3 station for the house's city
+The get_coords function returns the latitude and longitude associated with the TMY3 station for the house's city
 
 The energy_demand function pulls the energy usage data associated with the closest TMY3 weather station. This data is collected by the Office of Energy Efficiency 
 & Renewable Energy. 
@@ -25,7 +25,7 @@ The solar_savings function multiplies the solar_supply by the grid_cost output l
 The real_cost function multiplies the EnergyDemand output by the GridCost output and subtracts the SolarSavings output to find the real cost to the household. <br /><br />
 
 
-The class contains **two public functions**:
+The House class contains **two public functions**:
 
 The savings_in_range function finds the savings for a house over a given date range
 
