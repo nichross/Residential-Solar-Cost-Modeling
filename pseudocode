@@ -75,6 +75,13 @@ class House:
         lng = tmy3_coord[station['lng']]
         return lat, lng
 
+    def __real_savings(self):
+        """
+        This function returns an array containing hourly savings from solar installation.
+        The get_station and get_cost functions are called and sent to the solar_savings function
+        :return savings_array:
+        """
+    
     def __solar_savings(self, station, cost_kwh):
         """
         This function returns hourly savings from solar installation
