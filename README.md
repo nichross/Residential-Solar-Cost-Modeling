@@ -12,7 +12,7 @@ The savings_in_range function finds the savings for a house over a given date ra
 The cost_in_range function finds the total energy expenses for a house over a given date range<br /><br />
 
 
-The House class contains **eight private functions**:
+The House class contains **nine private functions**:
 
 The get_station function returns the TMY station for the house's city.
 
@@ -20,7 +20,9 @@ The get_coords function returns the latitude and longitude associated with the T
 
 The real_cost function returns an array containing hourly energy cost for the household.
 
-The solar_savings function returns hourly savings from solar installation.
+The solar_savings function returns the hourly savings from solar installation.
+
+The real_savings function calls the get_cost, get_station, and solar_savings then returns the hourly savings from solar installation. 
 
 The no_solar_cost function returns hourly energy expense for the household.
 
