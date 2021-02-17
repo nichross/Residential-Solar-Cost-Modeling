@@ -1,1 +1,48 @@
+"""
+Function: __energy_demand
+For Class: House
+Purpose: Return the kWh demanded each hour of the year for the a House object
+Modified: February 15, 2021
 
+Resource URL: https://openei.org/datasets/files/961/pub/
+"""
+
+import pandas as pd
+import datetime
+
+
+def energy_demand (self_house, my_city):
+
+    # Get url for the city's TYP3 station data
+    url_data = pd.read_csv("energy_demand_urls.csv", index_col=0, header=0, dtype=str)
+    url_ext = url_data.loc[my_city]["url_extension"]
+    base_url = "https://openei.org/datasets/files/961/pub/RESIDENTIAL_LOAD_DATA_E_PLUS_OUTPUT/BASE/"
+    new_url = base_url + url_ext
+
+    # Import energy demand data
+    dataset = pd.read_csv(new_url, header=0)
+
+    # Modify date/time entry and set to index
+    dataset['Date/Time'] = dataset['Date/Time'].replace(to_replace='  ', value='/2013 ', regex=True)
+    dataset['Date/Time'] = dataset['Date/Time'].replace(to_replace='24:00:00', value='00:00:00', regex=True)
+    dataset['Date/Time'] = pd.to_datetime(dataset['Date/Time'])
+    dataset.loc[dataset['Date/Time'].dt.time == datetime.time(0, 0, 0), 'Date/Time'] = dataset['Date/Time'] + \
+                                                                                       datetime.timedelta(days=1)
+    dataset = dataset.set_index('Date/Time')
+
+    # Calculate total electricity usage per hour
+    dataset['Total Electricity [kW](hourly)'] = dataset.loc[:, dataset.columns.str.contains('Electricity')].sum(axis=1)
+
+    # Get energy demand dataframe
+    energy_demand_data = dataset.filter(["Total Electricity [kW](hourly)"], axis=1)
+    return energy_demand_data
+
+
+"""
+Test Code
+"""
+
+self_house = "House Holder"
+my_city = "Pittsburgh"
+my_data = energy_demand(self_house, my_city)
+print(my_data)
