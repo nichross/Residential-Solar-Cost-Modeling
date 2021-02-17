@@ -116,4 +116,6 @@ class House:
         Then the electrical data is summed in a new column to give total hourly kW
         is returned
         :return energy_demand:
+        
+        Status: first draft completed
         """
